@@ -31,9 +31,10 @@ export class AuthController {
     }
 
     @Post('refresh')
+    @Public()
     @UseGuards(RtGuard)
     @HttpCode(HttpStatus.OK)
     refreshTokens(@GetCurrentUser() user) {
-        return this.authService.refreshTokens(user.userId, user.refreshToken)
+        return this.authService.refreshTokens(user.sub, user.refreshToken)
     }
 }
